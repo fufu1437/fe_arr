@@ -33,11 +33,11 @@ extern int fearr_set(FE_ARR *arr, ArrInt index, void *v);
 
 // 返回数组长度
 // 若`arr` 为 `NULL` 返回 -1
-ArrInt fearr_len(FE_ARR *arr);
+extern ArrInt fearr_len(FE_ARR *arr);
 
 // 返回数组大小
 // 若`arr` 为 `NULL` 返回 -1
-ArrInt fearr_size(FE_ARR *arr);
+extern ArrInt fearr_size(FE_ARR *arr);
 
 // 弹出数组末尾的指针，并返回它，如果数组长度为0
 // 若`arr`为空指针，则返回`NULL`
