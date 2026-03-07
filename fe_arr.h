@@ -17,35 +17,40 @@ typedef struct FE_ARR{
 
 #ifndef FEARR_IMPLEMENTATION
 
+// 构建列表
 extern FE_ARR *fearr_creat_arr(size_t size);
 
-// 获取 index 处的指针，超出数组长度返回NULL
+// 获取 `index` 处的指针，超出数组长度返回`NULL`
 extern void *fearr_get(FE_ARR *arr, ArrInt index);
 
 // 向数组追加一个指针
 extern int fearr_put(FE_ARR *arr, void *v);
 
-// 设置 index 处的指针
+// 设置 `index` 处的指针
 // 只允许对现有数据进行修改
-// 如超出数组长度，或 arr 是空指针返回NULL
+// 如超出数组长度，或 `arr` 为 `NULL` 返回`NULL`
 extern int fearr_set(FE_ARR *arr, ArrInt index, void *v);
 
 // 返回数组长度
+// 若`arr` 为 `NULL` 返回 -1
 ArrInt fearr_len(FE_ARR *arr);
 
 // 返回数组大小
+// 若`arr` 为 `NULL` 返回 -1
 ArrInt fearr_size(FE_ARR *arr);
 
-// 弹出数组末尾的指针，并返回它，如果数组长度为0，或arr为空指针，则返回NULL
+// 弹出数组末尾的指针，并返回它，如果数组长度为0
+// 若`arr`为空指针，则返回`NULL`
 extern void *fearr_pop(FE_ARR *arr);
 
-// 删除 index 处的指针，超出数组长度，或 arr 是空指针返回NULL
+// 删除 `index` 处的指针，超出数组长度，或 `arr` 是空指针返回`NULL`
 extern void *fearr_del(FE_ARR *arr, ArrInt index);
 
-// 删除arr这个数组容器，其内部指针如果使用malloc分配，则需自行释放
+// 删除 `arr` 这个数组容器，其内部指针如果使用`malloc`分配，则需自行释放
 extern void fearr_free_container(FE_ARR *arr);
 
-// 删除arr这个容器，和数组的指针，仅适用于所有值均为malloc/relloc/calloc分配的内存的数组
+// 删除`arr`这个容器，和数组的指针
+// 仅适用于所有值均为`malloc` `relloc` `calloc`分配的内存的数组
 extern void fearr_free_all(FE_ARR *arr);
 
 #endif
@@ -58,10 +63,12 @@ extern void fearr_free_all(FE_ARR *arr);
 // 扩容系数
 #define bate 1.5
 
+// 构建列表
 FE_ARR *fearr_creat_arr(size_t size) {
     return malloc(sizeof(void*) * size);
 }
 
+// 获取 `index` 处的指针，超出数组长度返回`NULL`
 void *fearr_get(FE_ARR *arr, ArrInt index) {
     if( (index>=arr->used)||(arr==NULL)  ) {
         return NULL;
@@ -69,6 +76,7 @@ void *fearr_get(FE_ARR *arr, ArrInt index) {
     return arr->value[index];
 }
 
+// 向数组追加一个指针
 int fearr_put(FE_ARR *arr, void* v) {
     if(arr==NULL) return -1;
     if(arr->used>=arr->size) {
@@ -84,6 +92,9 @@ int fearr_put(FE_ARR *arr, void* v) {
     return 0;
 }
 
+// 设置 `index` 处的指针
+// 只允许对现有数据进行修改
+// 如超出数组长度，或 `arr` 为 `NULL` 返回`NULL`
 int fearr_set(FE_ARR *arr, ArrInt index, void* v) {
     if(arr==NULL) return -1;
     if(index >= arr->used) return -1;
@@ -102,6 +113,22 @@ int fearr_set(FE_ARR *arr, ArrInt index, void* v) {
     return 0;
 }
 
+// 返回数组长度
+// 若`arr` 为 `NULL` 返回 -1
+ArrInt fearr_len(FE_ARR *arr) {
+    if(arr==NULL) return -1;
+    return arr->used;
+}
+
+// 返回数组大小
+// `arr` 为 `NULL` 返回 -1
+ArrInt fearr_size(FE_ARR *arr) {
+    if(arr==NULL) return -1;
+    return arr->size;
+}
+
+// 弹出数组末尾的指针，并返回它，如果数组长度为0
+// 若`arr`为空指针，则返回`NULL`
 void *fearr_pop(FE_ARR *arr) {
     if(arr==NULL) return NULL;
     arr->used--;
@@ -110,6 +137,7 @@ void *fearr_pop(FE_ARR *arr) {
     return temp;
 }
 
+// 删除 `index` 处的指针，超出数组长度，或 `arr` 是空指针返回`NULL`
 void *fearr_del(FE_ARR *arr, ArrInt index) {
     if(arr==NULL) return NULL;
     void *temp;
@@ -129,16 +157,7 @@ void *fearr_del(FE_ARR *arr, ArrInt index) {
     return temp;
 }
 
-ArrInt fearr_len(FE_ARR *arr) {
-    if(arr==NULL) return -1;
-    return arr->used;
-}
-
-ArrInt fearr_size(FE_ARR *arr) {
-    if(arr==NULL) return -1;
-    return arr->size;
-}
-
+// 删除 `arr` 这个数组容器，其内部指针如果使用`malloc`分配，则需自行释放
 void fearr_free_container(FE_ARR *arr) {
     if(arr==NULL) return;
     if(arr->value==NULL) { free(arr); return; }
@@ -146,6 +165,8 @@ void fearr_free_container(FE_ARR *arr) {
     free(arr);
 }
 
+// 删除`arr`这个容器，和数组的指针
+// 仅适用于所有值均为`malloc` `relloc` `calloc`分配的内存的数组
 void fearr_free_all(FE_ARR *arr) {
     if(arr==NULL) return;
     if(arr->value==NULL) { free(arr); return; }
