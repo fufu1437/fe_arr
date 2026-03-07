@@ -61,7 +61,7 @@ extern void fearr_free_all(FE_ARR *arr);
 #include <stdlib.h>
 
 // 扩容系数
-#define bate 1.5
+#define __FEARR_bate 1.5
 
 // 构建列表
 FE_ARR *fearr_creat_arr(size_t size) {
@@ -80,12 +80,12 @@ void *fearr_get(FE_ARR *arr, ArrInt index) {
 int fearr_put(FE_ARR *arr, void* v) {
     if(arr==NULL) return -1;
     if(arr->used>=arr->size) {
-        void** temp = realloc(arr->value,(arr->size*bate) * sizeof(void*));
+        void** temp = realloc(arr->value,(arr->size*__FEARR_bate) * sizeof(void*));
         if(temp==NULL) {
             return -1;
         }
         arr->value = temp;
-        arr->size *= bate;
+        arr->size *= __FEARR_bate;
     }
     arr->value[arr->used] = v;
     arr->used++;
@@ -99,7 +99,7 @@ int fearr_set(FE_ARR *arr, ArrInt index, void* v) {
     if(arr==NULL) return -1;
     if(index >= arr->used) return -1;
     if(arr->used>=arr->size) {
-        void** temp = realloc(arr->value,(arr->size*bate) * sizeof(void*));
+        void** temp = realloc(arr->value,(arr->size*__FEARR_bate) * sizeof(void*));
         if(temp==NULL) {
             return -1;
         }
