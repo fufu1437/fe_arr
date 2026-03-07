@@ -4,7 +4,7 @@
 /* 
  *  修改该宏，以调整数据大小
 */
-#define ArrInt int
+typedef int ArrInt;
 
 /* 
  * 严禁在非初始化时操作列表，这将会产生不可控的结果
