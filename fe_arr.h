@@ -2,9 +2,9 @@
 #define fe_arr_header_h
 
 /*
- *  修改该定义，以调整数据大小
+ *  修改该宏定义，以调整数据大小
 */
-typedef int ArrInt;
+#define ArrInt int
 
 /*
  * 严禁在任何时候操作列表，这将产生不可预料的结果
@@ -85,7 +85,7 @@ void *fearr_get(FE_ARR *arr, ArrInt index) {
 int fearr_put(FE_ARR *arr, void *v) {
     if(arr == NULL) return -1;
     if(arr->used >= arr->size) {
-        void **temp = realloc(arr->value, (arr->size * __FEARR_bate) * sizeof(void *));
+        void **temp = realloc(arr->value, (arr->size * __FEARR_bate) * sizeof(void*));
         if(temp == NULL) {
             return -1;
         }
