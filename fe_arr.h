@@ -9,11 +9,7 @@ typedef int ArrInt;
 /* 
  * 严禁在任何时候操作列表，这将产生不可预料的结果
 */
-typedef struct FE_ARR{
-    void** value;
-    size_t size;
-    size_t used; //已储存元素数
-}FE_ARR;
+typedef struct FE_ARR FE_ARR;
 
 #ifndef FEARR_IMPLEMENTATION
 
@@ -59,6 +55,15 @@ extern void fearr_free_all(FE_ARR *arr);
 #ifdef FEARR_IMPLEMENTATION
 #include <stdio.h>
 #include <stdlib.h>
+
+/* 
+ * 严禁在任何时候操作列表，这将产生不可预料的结果
+*/
+typedef struct FE_ARR{
+    void** value;
+    size_t size;
+    size_t used; //已储存元素数
+}FE_ARR;
 
 // 扩容系数
 #define __FEARR_bate 1.5
