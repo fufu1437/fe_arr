@@ -2,7 +2,7 @@
 #define fe_arr_header_h
 
 /* 
- *  修改该宏，以调整数据大小
+ *  修改该定义，以调整数据大小
 */
 typedef int ArrInt;
 
