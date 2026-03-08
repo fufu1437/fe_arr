@@ -7,7 +7,7 @@
 typedef int ArrInt;
 
 /* 
- * 严禁在非初始化时操作列表，这将会产生不可控的结果
+ * 严禁在任何时候操作列表，这将产生不可预料的结果
 */
 typedef struct FE_ARR{
     void** value;
