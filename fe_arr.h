@@ -6,9 +6,7 @@
 */
 #define ArrInt int
 
-/*
- * 严禁在任何时候操作列表，这将产生不可预料的结果
-*/
+// 列表基类
 typedef struct FE_ARR FE_ARR;
 
 #ifndef FEARR_IMPLEMENTATION
@@ -51,12 +49,13 @@ extern void fearr_free_all(FE_ARR *arr);
 
 #endif
 
-
 #ifdef FEARR_IMPLEMENTATION
+
 #include <stdio.h>
 #include <stdlib.h>
 
 /*
+ * 列表基类
  * 严禁在任何时候操作列表，这将产生不可预料的结果
 */
 typedef struct FE_ARR {
@@ -104,7 +103,7 @@ int fearr_set(FE_ARR *arr, ArrInt index, void *v) {
     if(arr == NULL) return -1;
     if(index >= arr->used) return -1;
     if(arr->used >= arr->size) {
-        void **temp = realloc(arr->value, (arr->size * __FEARR_bate) * sizeof(void *));
+        void **temp = realloc(arr->value, (arr->size * __FEARR_bate) * sizeof(void*));
         if(temp == NULL) {
             return -1;
         }
