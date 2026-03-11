@@ -1,5 +1,5 @@
-#ifndef fe_arr_header_h
-#define fe_arr_header_h
+#ifndef FE_ARR_HEADER_H
+#define FE_ARR_HEADER_H
 
 /*
 MIT License
