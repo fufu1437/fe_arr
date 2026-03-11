@@ -26,7 +26,8 @@ SOFTWARE.
 */
 
 
-/* Source code repository
+/* 
+ * Source code repository
  * https://github.com/fufu1437/fe_arr
 */
 
@@ -43,7 +44,7 @@ typedef struct FE_ARR FE_ARR;
 #ifndef FEARR_IMPLEMENTATION
 
 // 构建列表
-extern FE_ARR *fearr_creat_arr(size_t size);
+extern FE_ARR *fearr_creat_arr(unsigned long size);
 
 // 获取 `index` 处的指针，超出数组长度返回`NULL`
 extern void *fearr_get(FE_ARR *arr, ArrInt index);
@@ -91,15 +92,15 @@ extern void fearr_free_all(FE_ARR *arr);
 */
 typedef struct FE_ARR {
     void **value;
-    size_t size;
-    size_t used; //已储存元素数
+    unsigned long size;
+    unsigned long used; //已储存元素数
 }FE_ARR;
 
 // 扩容系数
 #define __FEARR_bate 1.5
 
 // 构建列表
-FE_ARR *fearr_creat_arr(size_t size) {
+FE_ARR *fearr_creat_arr(unsigned long size) {
     return malloc(sizeof(void *) * size);
 }
 
