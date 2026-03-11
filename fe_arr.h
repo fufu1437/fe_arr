@@ -40,7 +40,7 @@ SOFTWARE.
 
 // 列表基类
 typedef struct FE_ARR FE_ARR;
-#define FEARR_IMPLEMENTATION
+
 #ifndef FEARR_IMPLEMENTATION
 
 // 构建列表
