@@ -52,6 +52,9 @@ extern void *fearr_get(FE_ARR *arr, ArrInt index);
 // 向数组追加一个指针
 extern int fearr_put(FE_ARR *arr, void *v);
 
+// 向数组追加一个指针
+extern int fearr_push(FE_ARR *arr, void *v);
+
 // 设置 `index` 处的指针
 // 只允许对现有数据进行修改
 // 如超出数组长度，或 `arr` 为 `NULL` 返回`NULL`
@@ -134,6 +137,11 @@ int fearr_put(FE_ARR *arr, void* v) {
     arr->value[arr->used] = v;
     arr->used++;
     return 0;
+}
+
+// 向数组追加一个指针
+int fearr_push(FE_ARR *arr, void *v) {
+    fearr_put(arr, v);
 }
 
 // 设置 `index` 处的指针
